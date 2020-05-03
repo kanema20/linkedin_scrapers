@@ -1,6 +1,8 @@
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.common.exceptions import NoSuchElementException
+from selenium.webdriver.common.action_chains import ActionChains
+import clipboard
 
 #import parameters
 import time
@@ -63,8 +65,42 @@ def search_leads(keyw):
     partner.click()
     time.sleep(2)
 
+    #united states only
+    geo =  driver.find_element_by_xpath('//form/ul/li[4]/div/div/div/div')
+    geo.click()
+    us = driver.find_element_by_xpath('//div/div/ol/li[1]/button')
+    us.click()
+
+
+
 def traverse_leads():
+    lead_boxes = driver.find_elements_by_class_name('search-results__result-item')
+    print(lead_boxes)
+
     
+    #get leads name
+
+    #get leads job title
+
+    #get leads company
+
+    #go to company sales nav page
+
+
+    #website  - make sure to get .text
+    web = driver.find_element_by_link_text('Website')
+    website = web.get_attribute('href')
+
+    #company url
+    menu_buttons = driver.find_element_by_class_name('right-actions-overflow-menu-trigger')
+    ac = ActionChains(driver)
+    ac.move_to_element(menu_buttons).move_by_offset(0,100).click().perform()
+    company_url = clipboard.paste()
+
+    driver.execute_script("window.history.go(-1)")
+    time.sleep(2)
+
+
 
 log_in_sales_nav()
 keyw = 'dentist'
