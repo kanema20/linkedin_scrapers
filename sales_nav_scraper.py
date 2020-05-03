@@ -28,13 +28,13 @@ def validate_field(field):
 def log_in_sales_nav(): #log in to linkedin and go to sales navigator
     driver.get('https://www.linkedin.com/login?trk=guest_homepage-basic_nav-header-signin')
     username = driver.find_element_by_id('username')
-    username.send_keys('kanema20@gmail.com')
+    username.send_keys(username)
 	#username.send_keys('kobirapu@gmail.com')
     time.sleep(0.5)
     
     password = driver.find_element_by_id('password')
 	#password.send_keys('bl73yo8thld')
-    password.send_keys('Tesla2020')
+    password.send_keys(password)
     log_in = driver.find_element_by_tag_name('button')
     log_in.click()
     time.sleep(0.5)
@@ -74,19 +74,27 @@ def search_leads(keyw):
 
 
 def traverse_leads():
-    lead_boxes = driver.find_elements_by_class_name('search-results__result-item')
-    print(lead_boxes)
-
     
-    #get leads name
+    last_page = driver.find_element_by_xpath('//section/div[2]/nav/ol/li[11]/button').text
+    for x in range(int(last_page)):
+        lead_boxes = driver.find_elements_by_class_name('search-results__result-item')
+        print(lead_boxes)
+        
+        for x in range(len(lead_boxes)):
+        #get leads name
+            name = driver.find_elements_by_class_name("result-lockup__name")[x].text
+            print(name)
+            lead_snp = driver.find_element_by_link_text(name)
+        #get leads sales nav profile 
+            lead_sales_page = lead_snp.get_attribute('href')
+            print(lead_sales_page)
+
 
     #get leads job title
 
     #get leads company
 
     #go to company sales nav page
-
-
     #website  - make sure to get .text
     web = driver.find_element_by_link_text('Website')
     website = web.get_attribute('href')
