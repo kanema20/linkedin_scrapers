@@ -1,4 +1,4 @@
-import credentials #local file for user/pass 
+import sys
 
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
@@ -13,6 +13,9 @@ import csv
 import os
 import random
 import pandas as pd
+
+sys.path.insert(1, 'sensitive_info/credentials') #local file for user/pass 
+import credentials
 
 driver = webdriver.Chrome('/Users/kanem/chromedriver')
 options = webdriver.ChromeOptions()
@@ -31,11 +34,9 @@ def log_in_sales_nav(): #log in to linkedin and go to sales navigator
     driver.get('https://www.linkedin.com/login?trk=guest_homepage-basic_nav-header-signin')
     username = driver.find_element_by_id('username')
     username.send_keys(credentials.user)
-	#username.send_keys('kobirapu@gmail.com')
     time.sleep(0.5)
     
     password = driver.find_element_by_id('password')
-	#password.send_keys('bl73yo8thld')
     password.send_keys(credentials.passw)
     log_in = driver.find_element_by_tag_name('button')
     log_in.click()
