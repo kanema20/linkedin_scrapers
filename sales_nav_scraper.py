@@ -1,3 +1,5 @@
+import credentials #local file for user/pass 
+
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.common.exceptions import NoSuchElementException
@@ -28,13 +30,13 @@ def validate_field(field):
 def log_in_sales_nav(): #log in to linkedin and go to sales navigator
     driver.get('https://www.linkedin.com/login?trk=guest_homepage-basic_nav-header-signin')
     username = driver.find_element_by_id('username')
-    username.send_keys(username)
+    username.send_keys(credentials.user)
 	#username.send_keys('kobirapu@gmail.com')
     time.sleep(0.5)
     
     password = driver.find_element_by_id('password')
 	#password.send_keys('bl73yo8thld')
-    password.send_keys(password)
+    password.send_keys(credentials.passw)
     log_in = driver.find_element_by_tag_name('button')
     log_in.click()
     time.sleep(0.5)
